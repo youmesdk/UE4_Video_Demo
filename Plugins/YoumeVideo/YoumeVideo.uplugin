@@ -1,0 +1,44 @@
+﻿{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "YoumeVideo",
+	"Description": "Add support for live video and realtime voice",
+	"Category": "Other",
+	"CreatedBy": "Youme Technology (Shenzhen) Co.,Ltd.",
+	"CreatedByURL": "https://www.youme.im/",
+	"DocsURL": "https://www.youme.im/",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EngineVersion": "4.26.0",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "YoumeVideoUasge",
+			"Type": "Runtime",
+			"LoadingPhase": "PostConfigInit",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32",
+				"Mac",
+				"IOS",
+				"Android"
+			]
+		},
+		{
+			"Name": "YoumeVideo",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"WhitelistPlatforms": [
+				"Win64",
+				"Win32",
+				"Mac",
+				"IOS",
+				"Android"
+			]
+		}
+	]
+}

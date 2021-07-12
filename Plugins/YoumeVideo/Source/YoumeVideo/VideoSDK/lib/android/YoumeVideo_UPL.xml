@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Vivox plugin additions-->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- init section is always evaluated once per architecture -->
+  <init>
+    <log text="YouMe init"/>
+    <setBool result="bSupported" value="false"/>
+    <isArch arch="armeabi-v7a">
+      <setBool result="bSupported" value="true"/>
+    </isArch>
+    <isArch arch="arm64-v8a">
+      <setBool result="bSupported" value="true"/>
+    </isArch>
+    <isArch arch="armeabi">
+      <setBool result="bSupported" value="true"/>
+    </isArch>
+    <isArch arch="x86">
+      <setBool result="bSupported" value="true"/>
+    </isArch>
+    <if condition="bSupported">
+      <false>
+        <log text="Unsupported architecture: $S(Architecture)"/>
+      </false>
+    </if>
+
+  </init>
+
+  <minimumSDKAPI>
+    <insertValue value="19"/>
+    <insertNewline/>
+  </minimumSDKAPI>
+
+
+  <!-- optional updates applied to AndroidManifest.xml -->
+  <androidManifestUpdates>
+
+    <addPermission android:name="android.permission.INTERNET"/>
+    <addPermission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <addPermission android:name="android.permission.RECORD_AUDIO"/>
+    <addPermission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <addPermission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <addPermission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <addPermission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <addPermission android:name="android.permission.READ_PHONE_STATE" />
+    <addPermission android:name="android.permission.RECORD_AUDIO" />
+    <addPermission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <addPermission android:name="android.permission.BLUETOOTH" />
+    <addPermission android:name="android.permission.CAMERA" />
+    <addPermission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+
+  </androidManifestUpdates>
+  <!-- optional additions to the GameActivity imports in GameActivity.java -->
+
+  <!--
+  <soLoadLibrary>
+    <loadLibrary name="nlscppsdk" failmsg="Youme library not loaded and required nlscppsdk!" />
+    <loadLibrary name="uscasr" failmsg="Youme library not loaded and required uscasr!" />
+    <loadLibrary name="uuid" failmsg="Youme library not loaded and required uuid!" />
+    <loadLibrary name="yim" failmsg="Youme library not loaded and required yim!" />
+  </soLoadLibrary>
+  -->
+
+  <proguardAdditions>
+    <insert>
+      -keep class com.youme.** {*;}
+      -keep class com.iflytek.**
+      -keepattributes Signature
+    </insert>
+  </proguardAdditions>
+
+  <resourceCopies>
+
+    <!--<copyFile src="$S(AbsPluginDir)/android-support-v4.jar" dst="$S(BuildDir)/libs/android-support-v4.jar" />-->
+    <copyFile src="$S(AbsPluginDir)/youme_voice_engine.jar" dst="$S(BuildDir)/libs/youme_voice_engine.jar" />
+    <copyFile src="$S(AbsPluginDir)/$S(Architecture)/libyoume_voice_engine.so" dst="$S(BuildDir)/libs/$S(Architecture)/libyoume_voice_engine.so" />
+
+  </resourceCopies>
+
+
+  <gameActivityImportAdditions>
+
+    <insert>
+      import com.youme.voiceengine.mgr.YouMeManager;
+      import com.youme.voiceengine.*;
+    </insert>
+
+
+  </gameActivityImportAdditions>
+
+
+  <!-- optional additions to GameActivity onCreate in GameActivity.java -->
+  <gameActivityOnCreateAdditions>
+
+
+    <insert>
+      // Begin YouMe onCreate
+      YouMeManager.Init(this);
+      // super.onCreate(bundle);
+      // End YouMe onCreate
+    </insert>
+
+
+  </gameActivityOnCreateAdditions>
+
+
+
+
+</root>
